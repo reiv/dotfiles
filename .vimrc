@@ -7,8 +7,8 @@
 " General:
 " --------------------------------------------------------------
 set nocp                   " Jailbait
-set history=1000           " Command history
 set nospell                " Write code, not prose
+set history=1000           " Command history
 
 syntax on                  " Syntax highlighting
 filetype plugin indent on  " Filetype detection
@@ -23,6 +23,7 @@ set shortmess=fnx    " Abbreviate messages
 set showmode         " Show current mode in the status line
 set showcmd          " Show current command in the status line
 set nolazyredraw     " Always redraw the screen
+set visualbell       " No beeps
 
 " 'Invisible' characters
 set listchars=tab:▸\ ,eol:¬
@@ -33,9 +34,21 @@ if has("gui_running")
     set guioptions-=T  " no toolbar
     set guioptions+=b  " horizontal scrollbar
     set mousehide      " hide the mouse pointer when typing
+
     " colorscheme underwater-mod
     colorscheme molokai
 endif
+
+" --------------------------------------------------------------
+" Formatting:
+" --------------------------------------------------------------
+set tabstop=4      " Number of spaces in a <Tab>
+set shiftwidth=4   " Number of spaces to use for (auto)indent
+set textwidth=79   " Maximum line width (word wrap)
+set nowrap         " Don't wrap lines visually
+set backspace=2    " Allow backspacing over everything
+
+set formatoptions+=r,n,1 " See :help fo-table
 
 " --------------------------------------------------------------
 " Search:
@@ -45,24 +58,6 @@ set incsearch      " Immediate feedback on search pattern
 set ignorecase     " Searches are case-insensitive
 set smartcase      " Overrides 'ignorecase' when search pattern
                    " contains uppercase letters.
-
-" --------------------------------------------------------------
-" Formatting:
-" --------------------------------------------------------------
-set tabstop=4      " Number of spaces in a <Tab>
-set shiftwidth=4   " Number of spaces to use for (auto)indent
-set textwidth=79   " Maximum line width (word wrap)
-set nowrap         " Don't wrap lines visually
-
-set formatoptions+=r,n,1 " See :help fo-table
-
-" --------------------------------------------------------------
-" Misc:
-" --------------------------------------------------------------
-set showcmd        " Show (partial) command in status line
-                   " pattern inclused uppercase letters
-set backspace=2    " Allow backspacing over everything
-set visualbell     " No beeps
 
 " --------------------------------------------------------------
 " Backups:
@@ -80,8 +75,8 @@ let mapleader = ","
 ino jj <esc>
 cno jj <C-c>
 
-" Strin whitespace
-map <LEADER>s :%s/ \+$//g<CR>:nohl<CR>
+" Clean up whitespace
+map <LEADER>s :%s/ \+$//g<CR>
 
 if !exists("b:runonce")
     " Load Vim bundles from .vim/bundle/
